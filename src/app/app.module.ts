@@ -9,6 +9,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import {ClienteService} from './clientes/cliente.service';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import { FormComponent } from './clientes/form.component';
+import {FormsModule} from '@angular/forms';
 
 // rutas
 const routes: Routes = [
@@ -25,11 +27,13 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    ClientesComponent
+    ClientesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ClienteService],

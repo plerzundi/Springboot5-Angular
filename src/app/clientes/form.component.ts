@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cliente} from './cliente';
 import {ClienteService} from './cliente.service';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -13,7 +13,8 @@ export class FormComponent implements OnInit {
   private cliente: Cliente = new Cliente();
   private titulo: string = 'Crear Cliente';
 
-  constructor(private clienteService: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private clienteService: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.cargarCliente();
@@ -22,7 +23,7 @@ export class FormComponent implements OnInit {
 
   cargarCliente(): void {
     this.activatedRoute.params.subscribe(params => {
-      let id = params['id']
+      let id = params['id'];
       if (id) {
         this.clienteService.getCliente(id).subscribe((cliente) =>
           this.cliente = cliente);
@@ -31,14 +32,10 @@ export class FormComponent implements OnInit {
   }
 
 
-
-
-
-
   public create(): void {
 
-   /* console.log('clicked!'); */
-   /* console.log(this.cliente); */
+    /* console.log('clicked!'); */
+    /* console.log(this.cliente); */
 
     this.clienteService.create(this.cliente).subscribe(
       cliente => {
@@ -46,5 +43,16 @@ export class FormComponent implements OnInit {
         swal('Nuevo Cliente', `Cliente ${cliente.nombre} creado con éxito!`, 'success');
       });
   }
+
+  public update(): void{
+    this.clienteService.update(this.cliente)
+      .subscribe( cliente => {
+        this.router.navigate(['/clientes'])
+        swal('Cliente Actualizado', `Cliente ${cliente.nombre} actualizado con éxito!`, 'success');
+        }
+      );
+  }
+
+
 
 }
